@@ -1,81 +1,264 @@
-:root {
-  --backgorund-white-opacity: rgb(255,255,255,50%)
+@font-face {
+  font-family: 'MyCustomFont';
+  src: url('fonts/Myfont.otf') format('opentype'); /* Укажите правильный формат */
+  font-weight: normal;
+  font-style: normal;
 }
 
+/* Применение шрифта ко всем текстам */
+html, body {
+  font-family: 'MyCustomFont', sans-serif; /* Общий шрифт для всего текста */
+}
 
-
+/* Общие стили для ссылок */
 a {
-  color: rgb(0, 0, 0);
+  color: rgb(243, 243, 243);
   text-decoration: none;
-  transition: opacity .25s ease;
-}
-a:hover {
-   opacity: .7;
+  transition: color 0.25s ease, opacity 0.25s ease;
+  font-family: 'MyCustomFont', sans-serif; /* Применение шрифта к ссылкам */
 }
 
+a.link {
+  color: rgb(65, 63, 63);
+}
 
+a.link:hover {
+  opacity: 0.8;
+}
+
+/* Заголовок */
 .header {
-  height: 100vh;
-  background: url(../images/background.JPG);
-  background-size: cover;
-  clip-path: polygon(15% 0%, 85% 0%, 100% 0%, 100% 93.8%, 49.8% 100%, 49.4% 100%, 0% 92.5%, 0% 0%);
-
+  position: relative;
+  height: 110vh;
+  clip-path: polygon(30% 0%, 70% 0%, 100% 0, 100% 90%, 53% 100%, 0 86%, 0 0);
 }
 
+.header__background, 
+.header__background-wrapper {
+  position: absolute;
+  height: inherit;
+  width: 100%;
+  transition: opacity 0.5s ease;
+}
+
+.header__background {
+  object-fit: cover;
+}
+
+.header__background-wrapper {
+  background: rgba(118, 118, 131, 0.5);
+  z-index: 1;
+}
+
+/* Верхний заголовок */
 .header-top {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
-
-  height: 80px;
-
-  color: black;
-  background: var(--backgorund-white-opacity)
-}
-.header-top {
-  color: #fff;
-}
-.header-top a.active {
-  color: beige;
+  justify-content: space-evenly;
+  height: 70px;
+  color: white;
+  background: rgba(255, 255, 255, 0.5);
+  z-index: 2;
+  transition: background 0.5s ease;
 }
 
+.header-top a.link {
+  color: rgb(63, 63, 63);
+}
 
+/* Логотип */
 .logo {
   font-size: 36px;
+  margin: 10px 10px 10px 0;
 }
 
+/* Меню */
 .menu {
   display: flex;
   align-items: center;
   justify-content: center;
+}
 
-}
 .menu-element {
-  margin-right: 10px;
-  
-  font-size: 21px;
+  margin-right: 7px;
+  font-size: 20px;
 }
+
 .menu-element:last-child {
   margin-right: 0;
-  margin-left: 0;
 }
- 
+
+/* Активное и наведенное состояние для ссылок */
+.menu-element a.link:hover,
+.menu-element a.link.active {
+  color: rgb(214, 209, 209);
+}
+
+/* Переключатель */
+.switcher {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 35px;
+  width: 90px;
+  padding: 0 10px;
+  background: rgb(88, 85, 85);
+  border-radius: 20px;
+  opacity: 0.9;
+  transition: opacity 0.25s ease;
+  cursor: pointer;
+}
+
+.switcher:hover {
+  opacity: 1;
+}
+
+.switcher:before {
+  content: "";
+  width: 40px;
+  height: 30px;
+  background: black;
+  position: absolute;
+  left: 44px;
+  z-index: 1;
+  border-radius: 20px;
+  transition: left 0.25s ease-in-out;
+}
+
+#lang:checked + .switcher:before {
+  left: 7px;
+}
+
+#lang:checked + .switcher span {
+  color: aliceblue;
+}
+
+.switcher span {
+  flex: 1;
+  text-align: center;
+  color: aliceblue;
+  z-index: 2;
+}
+
+#lang {
+  display: none;
+}
+
+/* Центр заголовка */
 .header-center {
-  color: white;
+  position: relative;
+  color: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: calc(100vh - 80px);
-
-  color: #fff;
+  z-index: 2;
+  opacity: 0;
+  animation: fadeIn 1s forwards;
 }
+
 .header-center__wrapper {
   width: 100%;
-  background: var(--backgorund-white-opacity);
+  padding: 10px 0;
+  background: rgba(212, 212, 212, 0.5);
   text-align: center;
 }
 
 .name {
- font-size: 35px;
+  font-size: 39px;
+  line-height: 74px;
 }
+
+.description {
+  font-size: 20px;
+}
+
+/* Анимация появления */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+/* Стили для секций */
+.about-me, .feedback {
+  padding: 20px;
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+  animation-delay: 0.5s;
+}
+
+.about-me__title, .second-ttitle {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.about-me__description {
+  margin: 5px 0;
+}
+
+.feedback__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-wrapper {
+  margin-bottom: 10px;
+}
+
+.label {
+  margin-bottom: 5px;
+}
+
+.input {
+  padding: 8px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+}
+
+.input:focus {
+  border-color: #4CAF50;
+}
+
+.submit {
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit:hover {
+  background-color: #45a049;
+}
+
+/* Футер */
+footer {
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.socials {
+  list-style: none;
+  padding: 0;
+}
+
+.social-element {
+  display: inline;
+  margin: 0 10px;
+}
+
+
+
+

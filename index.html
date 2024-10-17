@@ -3,99 +3,331 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Myweblol</title>
+    <title>MyWebLol</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="fonts/Myfont.otf" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Общие стили для ссылок */
+        a {
+            color: rgb(243, 243, 243);
+            text-decoration: none;
+            transition: opacity 0.25s ease;
+        }
+
+        a.link {
+            color: rgb(65, 63, 63);
+        }
+
+        a.link:hover {
+            opacity: 0.8;
+        }
+
+        /* Заголовок */
+        .header {
+            position: relative;
+            height: 110vh;
+            clip-path: polygon(30% 0%, 70% 0%, 100% 0, 100% 90%, 53% 100%, 0 86%, 0 0);
+        }
+
+        .header__background, 
+        .header__background-wrapper {
+            position: absolute;
+            height: inherit;
+            width: 100%;
+        }
+
+        .header__background {
+            object-fit: cover;
+        }
+
+        .header__background-wrapper {
+            background: rgba(118, 118, 131, 0.5);
+            z-index: 1;
+        }
+
+        /* Верхний заголовок */
+        .header-top {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            height: 70px;
+            color: white;
+            background: rgba(255, 255, 255, 0.5);
+            z-index: 2;
+        }
+
+        .header-top a.link {
+            color: rgb(63, 63, 63);
+        }
+
+        /* Логотип */
+        .logo {
+            font-size: 36px;
+            margin: 10px 10px 10px 0;
+        }
+
+        /* Меню */
+        .menu {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-element {
+            margin-right: 7px;
+            font-size: 20px;
+        }
+
+        .menu-element:last-child {
+            margin-right: 0;
+        }
+
+        /* Активное и наведенное состояние для ссылок */
+        .menu-element a.link:hover,
+        .menu-element a.link.active {
+            color: rgb(214, 209, 209);
+        }
+
+        /* Переключатель */
+        .switcher {
+            position: relative;
+            display: flex;
+            align-items: center;
+            height: 35px;
+            width: 90px;
+            padding: 0 10px;
+            background: rgb(88, 85, 85);
+            border-radius: 20px;
+            opacity: 0.9;
+            transition: opacity 0.25s ease;
+            cursor: pointer;
+        }
+
+        .switcher:hover {
+            opacity: 1;
+        }
+
+        .switcher:before {
+            content: "";
+            width: 40px;
+            height: 30px;
+            background: black;
+            position: absolute;
+            left: 44px;
+            z-index: 1;
+            border-radius: 20px;
+            transition: left 0.25s ease-in-out;
+        }
+
+        #lang:checked + .switcher:before {
+            left: 7px;
+        }
+
+        #lang:checked + .switcher span {
+            color: aliceblue;
+        }
+
+        .switcher span {
+            flex: 1;
+            text-align: center;
+            color: aliceblue;
+            z-index: 2;
+        }
+
+        #lang {
+            display: none;
+        }
+
+        /* Центр заголовка */
+        .header-center {
+            position: relative;
+            color: rgb(255, 255, 255);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: calc(100vh - 80px);
+            z-index: 2;
+        }
+
+        .header-center__wrapper {
+            width: 100%;
+            padding: 10px 0;
+            background: rgba(212, 212, 212, 0.5);
+            text-align: center;
+        }
+
+        .name {
+            font-size: 39px;
+            line-height: 74px;
+        }
+
+        .description {
+            font-size: 20px;
+        }
+
+        /* Стили для секций */
+        .about-me, .feedback {
+            padding: 20px;
+        }
+
+        .about-me__title, .second-ttitle {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .about-me__description {
+            margin: 5px 0;
+        }
+
+        .feedback__form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-wrapper {
+            margin-bottom: 10px;
+        }
+
+        .label {
+            margin-bottom: 5px;
+        }
+
+        .input {
+            padding: 8px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .submit {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .submit:hover {
+            background-color: #45a049;
+        }
+
+        /* Футер */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .socials {
+            list-style: none;
+            padding: 0;
+        }
+
+        .social-element {
+            display: inline;
+            margin: 0 10px;
+        }
+    </style>
 </head>
 <body>
     <header class="header">
+        <img class="header__background" src="images/background.jpg" alt="background" />
+        <div class="header__background-wrapper"></div>
+
         <div class="header-top">
-            <span class="logo">1428</span>
+            <a href="#home" class="link logo">1428</a>
 
             <nav class="navigation">
                 <ul class="menu">
                     <li class="menu-element">
-                        <a class="menu-element__link" href="">Home</a>
+                        <a class="link menu-element__link active" href="#home">
+                            <img src="icons/home.svg" alt="icon" width="24" height="24">
+                        </a>
                     </li>
                     <li class="menu-element">
-                        <a class="menu-element__link" href="">About</a>
+                        <a class="link menu-element__link" href="#about-me">About Me</a>
                     </li>
                     <li class="menu-element">
-                        <a class="menu-element__link" href="">Contact me</a>
+                        <a class="link menu-element__link" href="#feedback">Feedback</a>
                     </li>
                 </ul>
             </nav>
-            <div class="switcher">Ru/Eng</div>
+            <div class="switcher-wrapper">
+                <input type="checkbox" id="lang" checked />
+                <label class="switcher" for="lang">
+                    <span>Eng</span>
+                    <span>Ru</span>
+                </label>
+            </div>
         </div>
 
         <div class="header-center">
-            <h1 class="name">1428Stef</h1>
-            <p class="description">Hi, my name is Stefan</p>
+            <div class="header-center__wrapper">
+                <h1 class="name">1428</h1>
+                <p class="description">Hello, my name is Stefan</p>
+            </div>
         </div>
-     </header>
+    </header>
 
-    <section class="about-me">
+    <section id="about-me" class="about-me">
         <div class="left">
-            <img src="" alt="My photo" />
+            <img src="" alt="Photo lol" />
         </div>
         <div class="right">
-            <p class="about-me__title">1428</p>
-            <p class="about-me__description gray">If you want to lead a happy life, 
-                you must be attached to a goal, not to people or things.
-            </p>
+            <p class="about-me__title">Stef</p>
+            <p class="about-me__description">I don't care what you think unless it is about me.</p>
+            <p class="about-me__description">I'm a web developer and a slacker</p>
+            <p class="about-me__description">I love pizza with pineapple, may the Italians forgive me</p>
 
-            <p class="about-me__description">
-                There should be information here, but it is not. This can cause some questions and confusion, as the absence of data in this place is unpredictable and unexpected. We understand that users expect to receive valuable and relevant information that could help them solve various problems or make decisions. The absence of information can lead to difficulties in understanding the context, as well as to the emergence of uncertainty and ambiguity.
-            </p>
-            <p class="about-me__description">
-                P.S you have read the most useless information :D
-            </p>
-            
             <ul class="about-me__extra">
-             <li class="about-me__extra-element">
-              I'm from California,LA.
-             </li>
-             <li class="about-me__extra-element">
-              I'm a web developer and a slacer.
-             </li>
-             <li class="about-me__extra-element">
-              I love pizza with pineapples, may the Italians forgive me.
-             </li>
+                <li class="about-me__extra-element">I from California, LA</li>
+                <li class="about-me__extra-element">Skills: Python, HTML, CSS, JavaScript</li>
             </ul>
         </div>
     </section>
 
-    <section class="contact-me">
-        <h2 class="second-title">Feedback</h2>
-
-        <form action="" class="contact-me__form">
+    <section id="feedback" class="feedback">
+        <h2 class="second-ttitle">Feedback</h2>
+        <form action="" class="feedback__form">
             <div class="input-wrapper">
                 <label class="label" for="name">Name</label>
-                <input class="input" type="text" id="name" required />
+                <input class="input" type="text" name="name" required />
             </div>
             <div class="input-wrapper">
                 <label class="label" for="email">E-mail</label>
-                <input class="input" type="email" id="email" required />
+                <input class="input" type="email" name="email" required />
             </div>
-
             <div class="textarea-wrapper">
-               <label class="label" for="message"></label>
-               <textarea class="textarea" name="message" id="message" cols="30" rows="10" required></textarea>
+                <label class="label" for="messge">Message</label>
+                <textarea class="input" name="messge" id="messge" cols="30" rows="10" required></textarea>
             </div>
-
-            <button type="submit" class="submit">Отправить</button>
+            <button type="submit" class="submit">Send</button>
         </form>
     </section>
 
     <footer>
         <ul class="socials">
-            <li class="social-element"><a href="" class="social-element__link">Steam</a>
+            <li class="social-element">
+                <a href="https://steamcommunity.com/id/etotipssilka22/" class="social-element__link">Steam</a>
             </li>
-            <li class="social-element"><a href="" class="social-element__link">Telegram</a>
+            <li class="social-element">
+                <a href="" class="social-element__link">Telegram</a>
             </li>
         </ul>
 
-        <p class="footer-about">
-            &copy;&nbsp;Stefan&nbsp;Afanasev
-        </p>
+        <div class="footer-about">
+            &copy; 1428
+        </div>
     </footer>
 </body>
 </html>
+
